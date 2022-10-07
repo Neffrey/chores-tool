@@ -2,7 +2,7 @@
 import React from "react";
 
 // COMPONENTS
-import ContactForm from "components/organisms/contactForm";
+//import ContactForm from "components/organisms/contactForm";
 
 // FC
 const HomeContact = () => {
@@ -38,9 +38,6 @@ const HomeContact = () => {
               and you are prepared to pay BIG BUCKS then send me a message and
               I’ll get back to you as soon as I can.
             </p>
-          </div>
-          <div className="flex w-full items-center justify-center">
-              <ContactForm />
           </div>
         </div>
       </div>
