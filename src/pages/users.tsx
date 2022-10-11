@@ -1,10 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { trpc } from "utils/trpc";
 
 const Users: NextPage = () => {
-  const addChore = trpc.useMutation("public.addChore");
-
   return (
     <>
       <Head>
@@ -18,14 +15,7 @@ const Users: NextPage = () => {
           Chores app
         </h1>
         <div className="flex w-full items-center justify-around pt-6 text-2xl">
-          <button
-            className="btn btn-primary"
-            onClick={() =>
-              addChore.mutate({ name: "hour chore", pointValue: 12 })
-            }
-          >
-            add hour chore
-          </button>
+          <button className="btn btn-primary">blah</button>
           <button className="btn btn-primary">log chores</button>
         </div>
       </main>

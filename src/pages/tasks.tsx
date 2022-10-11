@@ -21,7 +21,7 @@ const Tasks: NextPage = () => {
           <button
             className="btn btn-primary"
             onClick={() =>
-              addChore.mutate({ name: "big chore", pointValue: 10, isDifficult: true })
+              addChore.mutate({ name: "big chore", isDifficult: true })
             }
           >
             add chore
