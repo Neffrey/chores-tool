@@ -2,7 +2,7 @@
 import React from "react";
 
 // COMPONENTS
-import NeffreyLogo from "components/atoms/neffreyLogo";
+import NeffreyLogo from "components/svgs/neffreyLogo";
 
 // FC
 const Footer = () => {

@@ -2,9 +2,8 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "utils/trpc";
 
-const Home: NextPage = () => {
+const Users: NextPage = () => {
   const addChore = trpc.useMutation("public.addChore");
-  const allChores = trpc.useQuery(["public.getAllChores"]);
 
   return (
     <>
@@ -18,30 +17,20 @@ const Home: NextPage = () => {
         <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
           Chores app
         </h1>
-        <div className="flex w-full items-center justify-around pt-6 text-xl">
-          <input type="text" className="border-2 border-gray-300 p-2" />
+        <div className="flex w-full items-center justify-around pt-6 text-2xl">
           <button
             className="btn btn-primary"
             onClick={() =>
-              addChore.mutate({
-                name: "little chore",
-                pointValue: 1,
-                isDifficult: true,
-              })
+              addChore.mutate({ name: "hour chore", pointValue: 12 })
             }
           >
-            add chore
+            add hour chore
           </button>
-          <button
-            className="btn btn-primary"
-            onClick={() => console.log("allChores", allChores)}
-          >
-            log chores
-          </button>
+          <button className="btn btn-primary">log chores</button>
         </div>
       </main>
     </>
   );
 };
 
-export default Home;
+export default Users;
