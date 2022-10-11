@@ -25,7 +25,6 @@ const Home: NextPage = () => {
             onClick={() =>
               addChore.mutate({
                 name: "little chore",
-                pointValue: 1,
                 isDifficult: true,
               })
             }
