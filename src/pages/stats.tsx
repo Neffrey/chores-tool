@@ -1,7 +1,11 @@
-import UserAuthed from "components/hooks/userAuthed";
+// LIBRARIES
 import type { NextPage } from "next";
 import Head from "next/head";
 
+// COMPONENTS
+import UserAuthed from "components/hooks/userAuthed";
+
+// FC
 const Users: NextPage = () => {
   return (
     <>
