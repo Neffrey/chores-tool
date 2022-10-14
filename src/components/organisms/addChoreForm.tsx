@@ -4,14 +4,14 @@ import { Chore } from "@prisma/client";
 
 // COMPONENTS
 import { useAddChoreFormStore } from "components/stores/addChoreFormStore";
-import { useUserDataStore } from "components/stores/userDataStore";
+import { useVisitorDataStore } from "components/stores/visitorDataStore";
 
 // FC
 const AddChoreForm = () => {
   // STORE
   // UserDataStore
-  const allChores = useUserDataStore((state) => state.allChores);
-  const setAllChores = useUserDataStore((state) => state.setAllChores);
+  const allChores = useVisitorDataStore((state) => state.allChores);
+  const setAllChores = useVisitorDataStore((state) => state.setAllChores);
 
   // AddChoreFormStore
   const nameInput = useAddChoreFormStore((state) => state.nameInput);

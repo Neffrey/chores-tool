@@ -5,6 +5,7 @@ import { signIn, useSession } from "next-auth/react";
 
 // COMPONENTS
 import NeffreyLogo from "components/svgs/neffreyLogo";
+import AuthedIfElse from "components/hooks/authedIfElse";
 
 // FC
 const Header = () => {
@@ -27,7 +28,12 @@ const Header = () => {
       <div className="flex items-center justify-end gap-5 text-lg text-primary-content">
         <Link href="/chores">chores</Link>
         <Link href="/users">users</Link>
-        {status === "authenticated" && session?.user?.id && (
+        {AuthedIfElse(
+          <Link href="/account" passHref>
+            <div className="cursor-pointer text-lg text-primary-content">
+              {session?.user?.name}
+            </div>
+          </Link>,
           <button className="btn btn-accent" onClick={() => signIn("google")}>
             Login
           </button>

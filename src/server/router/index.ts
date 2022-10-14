@@ -8,7 +8,7 @@ import { userRouter } from "server/router/user-router";
 export const appRouter = createRouter()
   .transformer(superjson)
   .merge("public.", publicRouter)
-  .merge("private.", userRouter);
+  .merge("user.", userRouter);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;

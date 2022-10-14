@@ -3,13 +3,13 @@ import React from "react";
 import { trpc } from "utils/trpc";
 
 // COMPONENTS
-import { useUserDataStore } from "components/stores/userDataStore";
+import { useVisitorDataStore } from "components/stores/visitorDataStore";
 
 // FC
 const AllChoresTable = () => {
   // STORE
-  const allChores = useUserDataStore((state) => state.allChores);
-  const setAllChores = useUserDataStore((state) => state.setAllChores);
+  const allChores = useVisitorDataStore((state) => state.allChores);
+  const setAllChores = useVisitorDataStore((state) => state.setAllChores);
 
   //tRPC
   const { isLoading: allChoresisLoading } = trpc.useQuery(

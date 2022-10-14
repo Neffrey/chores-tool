@@ -1,15 +1,15 @@
 // LIBRARIES
 import create from "zustand";
+import { User } from "next-auth";
 
 // TYPES
-import { Chore } from "@prisma/client";
 
 export interface UserDataStoreTypes {
-  allChores: Chore[] | null;
-  setAllChores: (chores: Chore[]) => void;
+  user: User | null | undefined;
+  setUser: (userData: User | null | undefined) => void;
 }
 
 export const useUserDataStore = create<UserDataStoreTypes>((set) => ({
-  allChores: null,
-  setAllChores: (chores: Chore[]) => set({ allChores: chores }),
+  user: null,
+  setUser: (userData: User | null | undefined) => set({ user: userData }),
 }));

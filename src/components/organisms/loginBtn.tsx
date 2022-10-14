@@ -2,11 +2,11 @@
 import { signIn } from "next-auth/react";
 
 // COMPONENTS
-import UserAuthed from "components/hooks/userAuthed";
+import AuthedIfElse from "components/hooks/authedIfElse";
 
 // FC
 const LoginBtn = () => {
-  return UserAuthed(
+  return AuthedIfElse(
     // AUTHED
     <div className="">Hello to you account holder</div>,
     // UNAUTHED

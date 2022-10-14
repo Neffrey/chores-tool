@@ -12,6 +12,7 @@ const Chores: NextPage = () => {
       <Head>
         <title>All Chores</title>
         <meta name="description" content="View and Edit Chores" />
+        <link rel="icon" href="/CircleLogoIco.ico" />
       </Head>
 
       <main className="container mx-auto flex min-h-screen flex-col items-center justify-center p-4">

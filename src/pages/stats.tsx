@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 
 // COMPONENTS
-import UserAuthed from "components/hooks/userAuthed";
+import AuthedIfElse from "components/hooks/authedIfElse";
 
 // FC
 const Users: NextPage = () => {
@@ -12,7 +12,7 @@ const Users: NextPage = () => {
       <Head>
         <title>Stats</title>
         <meta name="description" content="Check the stats!" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/CircleLogoIco.ico" />
       </Head>
 
       <main className="container mx-auto flex min-h-screen flex-col items-center justify-center p-4">
@@ -20,7 +20,7 @@ const Users: NextPage = () => {
           Stats
         </h1>
         <div className="flex w-full items-center justify-around pt-6 text-2xl">
-          {/* {UserAuthed(
+          {/* {AuthedIfElse(
             <ChoreStats />,
             <div className="text-base-content">
               You must be logged in to view stats.

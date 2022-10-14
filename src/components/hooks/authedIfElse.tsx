@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 
 // FC
-const UserAuthed = (
+const AuthedIfElse = (
   authed: React.ReactNode,
   unauthed: React.ReactNode | null = null
 ) => {
@@ -12,4 +12,4 @@ const UserAuthed = (
   return status === "authenticated" && session?.user ? authed : unauthed;
 };
 
-export default UserAuthed;
+export default AuthedIfElse;
