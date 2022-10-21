@@ -69,7 +69,7 @@ model VerificationToken {
 
 model Chore {
     id          String      @id @default(cuid())
-    name        String
+    name        String      @default("untitled")
     user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId      String
     status      ChoreStatus @default(unknown)
