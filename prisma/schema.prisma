@@ -44,18 +44,19 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    createdAt     DateTime  @default(now())
-    updatedAt     DateTime  @updatedAt
+    id            String      @id @default(cuid())
+    createdAt     DateTime    @default(now())
+    updatedAt     DateTime    @updatedAt
     name          String?
-    email         String?   @unique
+    email         String?     @unique
     password      String?
     emailVerified DateTime?
     image         String?
-    role          String?   @default("user")
+    role          String?     @default("user")
     accounts      Account[]
     sessions      Session[]
-    Task          Task[]
+    ActionLogs    ActionLog[]
+    Chores        Chore[]
 }
 
 model VerificationToken {
@@ -67,18 +68,37 @@ model VerificationToken {
 }
 
 model Chore {
-    id          String  @id @default(cuid())
+    id          String      @id @default(cuid())
     name        String
-    isDifficult Boolean
-    Task        Task[]
+    user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId      String
+    status      ChoreStatus @default(unknown)
+    date        DateTime    @default(now()) // If completed then completed date, if not completed then due date
+    comment     String?     @db.VarChar(500)
+    isDifficult Boolean?    @default(false)
+    time        Int?        @default(0) // In minutes
+    points      Int?        @default(0)
+    ActionLog   ActionLog[]
 }
 
-model Task {
-    id         String @id @default(cuid())
-    name       String
-    pointValue Int
-    user       User   @relation(fields: [userId], references: [id])
-    userId     String
-    chore      Chore  @relation(fields: [choreId], references: [id])
-    choreId    String
+enum ChoreStatus {
+    completed
+    scheduled
+    unknown
+}
+
+model ActionLog {
+    id      String        @id @default(cuid())
+    user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId  String
+    chore   Chore?        @relation(fields: [choreId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    choreId String?
+    date    DateTime?     @default(now())
+    type    ActionLogType @default(added) // added, updated, deleted
+}
+
+enum ActionLogType {
+    added
+    updated
+    deleted
 }

@@ -3,7 +3,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 
 // COMPONENTS
-import AuthedIfElse from "components/hooks/authedIfElse";
+import IfAuth from "components/hooks/ifAuth";
+import PageUnauthed from "components/templates/pageUnauthed";
+import StatsAuthed from "components/templates/statsAuthed";
 
 // FC
 const Users: NextPage = () => {
@@ -20,15 +22,7 @@ const Users: NextPage = () => {
           Stats
         </h1>
         <div className="flex w-full items-center justify-around pt-6 text-2xl">
-          {/* {AuthedIfElse(
-            <ChoreStats />,
-            <div className="text-base-content">
-              You must be logged in to view stats.
-            </div>
-          )} */}
-          <div className="text-base-content">
-            You must be logged in to view stats.
-          </div>
+          {IfAuth(<StatsAuthed />, <PageUnauthed />)}
         </div>
       </main>
     </>

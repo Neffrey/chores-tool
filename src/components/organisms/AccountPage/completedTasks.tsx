@@ -1,13 +1,10 @@
 // FC
 const CompletedTasks = () => {
   return (
-    <div>
-      Completed Tasks
-      <button
-      //onClick={() => console.log({ userData })}
-      >
-        Log UserData
-      </button>
+    <div className="flex flex-col p-4">
+      <h4 className="text-2xl font-extrabold text-secondary-content uppercase tracking-wider">
+        Completed Tasks
+      </h4>
     </div>
   );
 };

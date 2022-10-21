@@ -4,13 +4,13 @@ import Head from "next/head";
 import { useSession } from "next-auth/react";
 
 // COMPONENTS
-import AuthedIfElse from "components/hooks/authedIfElse";
+import IfAuth from "components/hooks/ifAuth";
 import AccountAuthed from "components/templates/accountAuthed";
-import AccountUnauthed from "components/templates/accountUnauthed";
+import PageUnauthed from "components/templates/pageUnauthed";
 
 const Account: NextPage = () => {
   // SESSION
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
   return (
     <>
@@ -21,7 +21,7 @@ const Account: NextPage = () => {
       </Head>
 
       <main className="min-w-full">
-        {AuthedIfElse(<AccountAuthed />, <AccountUnauthed />)}
+        {IfAuth(<AccountAuthed />, <PageUnauthed />)}
       </main>
     </>
   );

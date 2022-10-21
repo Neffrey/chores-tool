@@ -1,15 +1,16 @@
 // LIBRARIES
 import React from "react";
 import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 // COMPONENTS
+import { useUserDataStore } from "components/stores/userDataStore";
 import NeffreyLogo from "components/svgs/neffreyLogo";
-import AuthedIfElse from "components/hooks/authedIfElse";
+import IfAuth from "components/hooks/ifAuth";
 
 // FC
 const Header = () => {
-  const { data: session, status } = useSession();
+  const { user } = useUserDataStore();
   return (
     <div
       // Row Container
@@ -24,20 +25,36 @@ const Header = () => {
         </div>
       </Link>
 
-      {/*** TODO: MENU COMPONENT ***/}
-      <div className="flex items-center justify-end gap-5 text-lg text-primary-content">
-        <Link href="/chores">chores</Link>
-        <Link href="/users">users</Link>
-        {AuthedIfElse(
-          <Link href="/account" passHref>
-            <div className="cursor-pointer text-lg text-primary-content">
-              {session?.user?.name}
-            </div>
-          </Link>,
-          <button className="btn btn-accent" onClick={() => signIn("google")}>
-            Login
-          </button>
-        )}
+      <div
+        // MENU
+        className="flex items-center justify-end gap-5"
+      >
+        <Link href={"/"} passHref>
+          <div className="cursor-pointer text-lg font-semibold uppercase tracking-wider text-primary-content">
+            Chores
+          </div>
+        </Link>
+        <Link href={"/stats"} passHref>
+          <div className="cursor-pointer text-lg font-semibold uppercase tracking-wider text-primary-content">
+            Stats
+          </div>
+        </Link>
+        {
+          // ACCOUNT / LOGIN BUTTON
+          IfAuth(
+            <Link href="/account" passHref>
+              <div className="cursor-pointer font-semibold uppercase tracking-wider text-primary-content">
+                {user?.name ? user.name : "Account"}
+              </div>
+            </Link>,
+            <button
+              className="btn btn-accent text-lg font-semibold uppercase tracking-wider text-accent-content "
+              onClick={() => signIn("google")}
+            >
+              Login
+            </button>
+          )
+        }
       </div>
     </div>
   );

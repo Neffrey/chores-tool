@@ -1,19 +1,15 @@
 import * as z from "zod";
-import { createProtectedRouter } from "./context";
+import { createProtectedRouter } from "server/router/context";
 
-// Example router with queries that can only be hit if the user requesting is signed in
+// PROTECTED ROUTER
 export const userRouter = createProtectedRouter()
+  // USER ROUTES
   .query("getUser", {
     async resolve({ ctx }) {
       if (ctx.session.user.id)
         return await ctx.prisma.user.findUnique({
           where: { id: ctx.session.user.id },
         });
-    },
-  })
-  .query("getSecretMessage", {
-    resolve({ ctx }) {
-      return "He who asks a question is a fool for five minutes; he who does not ask a question remains a fool forever.";
     },
   })
   .mutation("changeName", {
@@ -26,6 +22,85 @@ export const userRouter = createProtectedRouter()
         data: {
           name: input.name,
         },
+      });
+    },
+  })
+
+  // CHORE ROUTES
+  .mutation("addCompletedChore", {
+    input: z.object({
+      name: z.string().min(1).max(50),
+      comment: z.string(),
+      isDifficult: z.boolean(),
+      time: z.number().min(0).max(100), // time in 5 minute chunks rounded up
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.chore.create({
+        data: {
+          name: input.name,
+          userId: ctx.session.user.id,
+          date: new Date(),
+          comment: input.comment,
+          isDifficult: input.isDifficult,
+          time: input.time,
+          points: !input.isDifficult ? input.time : Math.ceil(input.time * 1.5),
+          status: "completed",
+          ActionLog: {
+            create: {
+              date: new Date(),
+              userId: ctx.session.user.id,
+              type: "added",
+            },
+          },
+        },
+        include: {
+          user: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      });
+    },
+  })
+  .mutation("updateChore", {
+    input: z.object({
+      id: z.string(),
+      name: z.string().min(3).max(50),
+      userId: z.string(),
+      date: z.date(),
+      comment: z.string(),
+      isDifficult: z.boolean(),
+      points: z.number().min(0).max(100),
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.chore.update({
+        where: { id: input.id },
+        data: {
+          name: input.name,
+          userId: input.userId,
+          date: input.date,
+          comment: input.comment,
+          isDifficult: input.isDifficult,
+          points: input.points,
+          ActionLog: {
+            create: {
+              date: new Date(),
+              userId: ctx.session.user.id,
+              type: "updated",
+            },
+          },
+        },
+      });
+    },
+  })
+  .mutation("deleteChore", {
+    input: z.object({
+      id: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.chore.delete({
+        where: { id: input.id },
       });
     },
   });

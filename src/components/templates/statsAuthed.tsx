@@ -3,11 +3,9 @@ import { trpc } from "utils/trpc";
 
 // COMPONENTS
 import { useUserDataStore } from "components/stores/userDataStore";
-import AccountDetails from "components/organisms/AccountPage/accountDetails";
-import AccountNameChangeModal from "components/organisms/AccountPage/accountNameChangeModal";
-import AccountTabs from "components/organisms/AccountPage/accountTabs";
 
-const AccountAuthed = () => {
+// FC
+const StatsAuthed = () => {
   // STORE
   const { user, setUser } = useUserDataStore();
 
@@ -27,12 +25,10 @@ const AccountAuthed = () => {
   if (isLoading) return <div>loading</div>;
   if (userData)
     return (
-      <>
-        <AccountDetails />
-        <AccountTabs />
-        {user && <AccountNameChangeModal user={user} />}
-      </>
+      <div className="flex min-h-screen w-full flex-col p-8 text-center text-xl">
+        Stats page Under Contstruction
+      </div>
     );
   return <></>;
 };
-export default AccountAuthed;
+export default StatsAuthed;

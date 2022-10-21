@@ -1,36 +1,45 @@
 // LIBRARIES
-import { trpc } from "utils/trpc";
+import Image from "next/future/image";
+import { signOut } from "next-auth/react";
+import { FaImage } from "react-icons/fa";
 
 // COMPONENTS
-import { useUserDataStore } from "components/stores/UserDataStore";
-import AccountNameChangeModal from "components/organisms/AccountPage/accountNameChangeModal";
+import { useUserDataStore } from "components/stores/userDataStore";
 
 // FC
 const AccountDetails = () => {
-  // STORE
-  const user = useUserDataStore((state) => state.user);
-  const setUser = useUserDataStore((state) => state.setUser);
-
-  // tRPC
-  const {
-    data: userData,
-    isLoading,
-    error,
-  } = trpc.useQuery(["user.getUser"], {
-    onSuccess: (data) => {
-      setUser(data);
-    },
-  });
-
-  // RETURN
-  if (error) return <div>Oops an error occured.</div>;
-  if (isLoading) return <div>Loading...</div>;
+  // STATE
+  const { user } = useUserDataStore();
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div>Account Details</div>
-      <button onClick={() => console.log({ userData })}>Log UserData</button>
-      <AccountNameChangeModal user={user} />
-      <button onClick={() => console.log({ userData })}>Log UserData</button>
+    <div className="grid grid-cols-4 items-center p-20 ">
+      <h1 className="col-span-3 text-center text-5xl font-extrabold leading-normal text-gray-700 md:text-[4rem]">
+        Hello {user?.name ? user.name : "friend"}!
+      </h1>
+      <div className="flex flex-col items-center justify-center gap-6">
+        {user?.image ? (
+          <Image
+            alt={`${user?.name}'s Profile Pic`}
+            src={user.image}
+            width={150}
+            height={150}
+            className="col-span-2 rounded-md"
+          />
+        ) : (
+          <FaImage className="text-5xl" />
+        )}
+        <button
+          className="btn-xl btn btn-primary w-full font-bold"
+          onClick={() => signOut()}
+        >
+          Logout
+        </button>
+        <label
+          htmlFor="account-name-change-modal"
+          className="modal-button btn w-full font-bold"
+        >
+          Change Name
+        </label>
+      </div>
     </div>
   );
 };
