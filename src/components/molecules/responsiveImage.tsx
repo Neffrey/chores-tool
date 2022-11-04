@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 
 // COMPONENTS
-import addClassName from "components/hooks/addClassName";
+import addClassName from "components/helpers/addClassName";
 
 // PROPS
 interface responsiveImageProps {

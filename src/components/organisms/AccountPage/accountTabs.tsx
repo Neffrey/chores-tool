@@ -5,7 +5,7 @@ import { FaCheck, FaExclamation } from "react-icons/fa";
 import { useAccountTabsStore } from "components/stores/accountTabsStore";
 import CompletedTasks from "components/organisms/AccountPage/completedTasks";
 import AssignedTasks from "components/organisms/AccountPage/assignedTasks";
-import addClassName from "components/hooks/addClassName";
+import addClassName from "components/helpers/addClassName";
 
 // CONSTANTS
 const ACTIVE_CSS = "bg-secondary text-primary-content";
