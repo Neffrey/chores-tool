@@ -81,7 +81,7 @@ const AccountNameChangeModal: FC<AccountNameChangeModalProps> = ({ user }) => {
         <div className="modal-box relative p-7" ref={modalRef}>
           <label
             htmlFor="account-name-change-modal"
-            className="btn btn-circle btn-sm absolute right-2 top-2 hover:bg-error"
+            className="btn-sm btn-circle btn absolute right-2 top-2 hover:bg-error"
           >
             ✕
           </label>
@@ -93,12 +93,12 @@ const AccountNameChangeModal: FC<AccountNameChangeModalProps> = ({ user }) => {
                 defaultValue={user?.name ? user.name : ""}
                 onChange={(e) => setNameInput(e.target.value)}
                 onBlur={() => handleValidation()}
-                className="text-md h-full w-full rounded-md p-2 text-primary-content"
+                className="text-md h-full w-full rounded-md bg-neutral-content p-2 text-neutral"
               />
             </div>
             <div className="col-span-1">
               <button
-                className="btn-xl btn btn-primary h-full w-full rounded-md"
+                className="btn-xl btn-primary btn h-full w-full rounded-md"
                 onClick={() => handleNameChange()}
               >
                 Save

@@ -80,7 +80,7 @@ const CompletedChoreForm = () => {
           name="addCompletedChoreName"
           type="text"
           value={name}
-          className="w-full min-w-full rounded-md border-2 border-primary p-2 text-black"
+          className="w-full min-w-full rounded-md border-2 border-primary bg-neutral-content p-2 text-neutral"
           onChange={(e) => setName(e.target.value)}
         />
       </label>
@@ -91,7 +91,7 @@ const CompletedChoreForm = () => {
         <textarea
           name="addCompletedChoreComment"
           value={comment}
-          className="col-span-2 w-full min-w-full rounded-md border-2 border-primary p-2 text-black"
+          className="col-span-2 w-full min-w-full rounded-md border-2 border-primary bg-neutral-content p-2 text-neutral"
           onChange={(e) => setComment(e.target.value)}
         />
       </label>
@@ -110,7 +110,7 @@ const CompletedChoreForm = () => {
           <select
             name="addCompletedChorePoints"
             value={timeSelectOption}
-            className="w-full min-w-full rounded-md border-2 border-primary p-2 text-black"
+            className="w-full min-w-full rounded-md border-2 border-primary bg-neutral-content p-2 text-neutral"
             onChange={(e) => setTimeSelectOption(parseInt(e.target.value, 10))}
           >
             {TIME_SELECT_OPTIONS.map((value, index) => (
@@ -121,20 +121,22 @@ const CompletedChoreForm = () => {
           </select>
         </label>
       </div>
-      <div className="p-4" />
+      <div className="p-2" />
       {timeSelectOption === 4 && (
-        <label className="flex cursor-pointer items-center justify-center p-2">
+        <label className="grid cursor-pointer grid-cols-2 items-center justify-center p-2">
+          Enter time in minutes
           <input
             type="number"
             value={customTime}
-            className="w-full min-w-full rounded-md border-2 border-primary p-2 text-black"
+            placeholder="Enter time in minutes"
+            className="w-full min-w-full rounded-md border-2 border-primary bg-neutral-content p-2 text-neutral"
             onChange={(e) => setCustomTime(parseInt(e.target.value, 10))}
           />
+          <div className="p-2" />
         </label>
       )}
-      <div className="p-4" />
       <button
-        className="btn btn-primary btn-lg col-span-2 w-full"
+        className="btn-primary btn-lg btn col-span-2 w-full"
         onClick={handleSubmit}
       >
         Add Chore
