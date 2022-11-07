@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 // COMPONENTS
 import { useUserDataStore } from "components/stores/userDataStore";
 import NeffreyLogo from "components/svgs/neffreyLogo";
-import IfAuth from "components/hooks/ifAuth";
+import IfAuth from "components/helpers/ifAuth";
 
 // FC
 const Header = () => {
@@ -39,6 +39,11 @@ const Header = () => {
             Stats
           </div>
         </Link>
+        <Link href={"/users"} passHref>
+          <div className="cursor-pointer text-lg font-semibold uppercase tracking-wider text-primary-content">
+            Users
+          </div>
+        </Link>
         {
           // ACCOUNT / LOGIN BUTTON
           IfAuth(
@@ -48,7 +53,7 @@ const Header = () => {
               </div>
             </Link>,
             <button
-              className="btn btn-accent text-lg font-semibold uppercase tracking-wider text-accent-content "
+              className="btn-accent btn text-lg font-semibold uppercase tracking-wider text-accent-content "
               onClick={() => signIn("google")}
             >
               Login

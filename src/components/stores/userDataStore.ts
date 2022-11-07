@@ -3,7 +3,6 @@ import create from "zustand";
 import { User } from "next-auth";
 
 // TYPES
-
 export interface UserDataStoreTypes {
   user: User | null | undefined;
   setUser: (userData: User | null | undefined) => void;

@@ -5,7 +5,7 @@ import Head from "next/head";
 // COMPONENTS
 import IfAuth from "components/helpers/ifAuth";
 import PageUnauthed from "components/templates/pageUnauthed";
-import StatsAuthed from "components/templates/statsAuthed";
+import UsersAdminAuthed from "components/templates/usersAdminAuthed";
 
 // FC
 const Users: NextPage = () => {
@@ -19,10 +19,10 @@ const Users: NextPage = () => {
 
       <main className="container mx-auto flex min-h-screen flex-col items-center justify-center p-4">
         <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
-          Stats
+          Users
         </h1>
         <div className="flex w-full items-center justify-around pt-6 text-2xl">
-          {IfAuth(<StatsAuthed />, <PageUnauthed />)}
+          {IfAuth(<UsersAdminAuthed />, <PageUnauthed />)}
         </div>
       </main>
     </>

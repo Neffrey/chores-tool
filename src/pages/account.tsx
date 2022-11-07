@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useSession } from "next-auth/react";
 
 // COMPONENTS
-import IfAuth from "components/hooks/ifAuth";
+import IfAuth from "components/helpers/ifAuth";
 import AccountAuthed from "components/templates/accountAuthed";
 import PageUnauthed from "components/templates/pageUnauthed";
 

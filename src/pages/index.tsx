@@ -5,7 +5,7 @@ import Head from "next/head";
 // COMPONENTS
 import CompletedChoreForm from "components/organisms/completedChoreForm";
 import AllChoresTable from "components/molecules/allChoresTable";
-import IFAuth from "components/hooks/ifAuth";
+import IFAuth from "components/helpers/ifAuth";
 import ChoresAuthed from "components/templates/choresAuthed";
 import PageUnauthed from "components/templates/pageUnauthed";
 

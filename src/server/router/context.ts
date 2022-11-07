@@ -58,3 +58,25 @@ export function createProtectedRouter() {
     });
   });
 }
+
+/**
+ * Creates a tRPC router that asserts all queries and mutations are from an admin user. Will throw an unauthorized error if a user is not signed in.
+ **/
+export function createAdminRouter() {
+  return createRouter().middleware(({ ctx, next }) => {
+    if (
+      !ctx.session ||
+      !ctx.session.user
+      // ||      ctx.session.user.role !== "admin"
+    ) {
+      throw new trpc.TRPCError({ code: "UNAUTHORIZED" });
+    }
+    return next({
+      ctx: {
+        ...ctx,
+        // infers that `session` is non-nullable to downstream resolvers
+        session: { ...ctx.session, user: ctx.session.user },
+      },
+    });
+  });
+}

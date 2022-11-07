@@ -2,7 +2,6 @@
 import React from "react";
 import { trpc } from "utils/trpc";
 import { FaWindowClose } from "react-icons/fa";
-import { useSession } from "next-auth/react";
 
 // COMPONENTS
 import { useVisitorDataStore } from "components/stores/visitorDataStore";
@@ -48,7 +47,9 @@ const AllChoresTable = () => {
       <div className="col-span-1 flex justify-center text-lg font-semibold uppercase">
         Points
       </div>
-      <div className="col-span-1" />
+      <div className="col-span-1 flex justify-center text-lg font-semibold uppercase">
+        Delete
+      </div>
       {allChores &&
         allChores?.map((chore) => (
           <React.Fragment key={chore.id}>
@@ -58,7 +59,7 @@ const AllChoresTable = () => {
             >
               {`${monthNumberToName(
                 chore.date.getMonth()
-              )} ${chore.date.getDay()}`}
+              )} ${chore.date.getDate()}`}
               <br />
               {dateToHoursMinutesAMPM(chore.date)}
             </div>

@@ -1,4 +1,7 @@
-const dateToHoursMinutesAMPM = (date: Date): string => {
+const dateToHoursMinutesAMPM: (date: Date | null | undefined) => string = (
+  date
+) => {
+  if (!date) return "";
   const hours = date.getHours();
   const minutes = date.getMinutes();
   const ampm = hours >= 12 ? "PM" : "AM";

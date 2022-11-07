@@ -1,20 +1,20 @@
-const monthNumberToName = (number: number): string => {
+const monthNumberToName: (number: number) => string = (number) => {
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
   const result = months[number];
-  if (result === undefined) {
+  if (result === undefined || result === null || number < 0 || number >= 12) {
     return "no month";
   }
   return result;
