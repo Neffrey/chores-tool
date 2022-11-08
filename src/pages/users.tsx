@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 
 // COMPONENTS
-import IfAuth from "components/helpers/ifAuth";
+import IfAdmin from "components/helpers/ifAdmin";
 import PageUnauthed from "components/templates/pageUnauthed";
 import UsersAdminAuthed from "components/templates/usersAdminAuthed";
 
@@ -22,7 +22,7 @@ const Users: NextPage = () => {
           Users
         </h1>
         <div className="flex w-full items-center justify-around pt-6 text-2xl">
-          {IfAuth(<UsersAdminAuthed />, <PageUnauthed />)}
+          {IfAdmin(<UsersAdminAuthed />, <div>Admin only page</div>)}
         </div>
       </main>
     </>

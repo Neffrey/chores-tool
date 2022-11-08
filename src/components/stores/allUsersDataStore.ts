@@ -2,9 +2,9 @@
 import create from "zustand";
 
 // TYPES
-type User = {
+export type User = {
   id?: string;
-  name?: string | number | null;
+  name?: string | null;
   email?: string | null;
   emailVerified?: Date | null;
   image?: string | null;

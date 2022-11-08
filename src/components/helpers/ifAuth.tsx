@@ -9,7 +9,8 @@ const IfAuth = (
   // SESSION
   const { data: session, status } = useSession();
 
-  return status === "authenticated" && session?.user //?.role === "approved user"
+  return status === "authenticated" &&
+    (session?.user?.role === "user" || session?.user?.role === "admin")
     ? authed
     : unauthed;
 };

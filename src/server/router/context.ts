@@ -66,8 +66,8 @@ export function createAdminRouter() {
   return createRouter().middleware(({ ctx, next }) => {
     if (
       !ctx.session ||
-      !ctx.session.user
-      // ||      ctx.session.user.role !== "admin"
+      !ctx.session.user ||
+      ctx.session.user.role !== "admin"
     ) {
       throw new trpc.TRPCError({ code: "UNAUTHORIZED" });
     }

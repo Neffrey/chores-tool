@@ -52,7 +52,7 @@ model User {
     password      String?
     emailVerified DateTime?
     image         String?
-    role          String?     @default("user")
+    role          String?     @default("new") // new, user, admin
     accounts      Account[]
     sessions      Session[]
     ActionLogs    ActionLog[]

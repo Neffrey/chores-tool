@@ -7,6 +7,7 @@ import { signIn } from "next-auth/react";
 import { useUserDataStore } from "components/stores/userDataStore";
 import NeffreyLogo from "components/svgs/neffreyLogo";
 import IfAuth from "components/helpers/ifAuth";
+import IfAdmin from "components/helpers/ifAdmin";
 
 // FC
 const Header = () => {
@@ -39,17 +40,19 @@ const Header = () => {
             Stats
           </div>
         </Link>
-        <Link href={"/users"} passHref>
-          <div className="cursor-pointer text-lg font-semibold uppercase tracking-wider text-primary-content">
-            Users
-          </div>
-        </Link>
+        {IfAdmin(
+          <Link href={"/users"} passHref>
+            <div className="cursor-pointer text-lg font-semibold uppercase tracking-wider text-primary-content">
+              Users
+            </div>
+          </Link>
+        )}
         {
           // ACCOUNT / LOGIN BUTTON
           IfAuth(
             <Link href="/account" passHref>
               <div className="cursor-pointer font-semibold uppercase tracking-wider text-primary-content">
-                {user?.name ? user.name : "Account"}
+                {user?.name ? user.name : "My Account"}
               </div>
             </Link>,
             <button

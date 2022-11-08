@@ -62,9 +62,10 @@ const AccountNameChangeModal: FC<AccountNameChangeModalProps> = ({ user }) => {
       changeName.mutate({
         name: nameInput,
       });
-      if (changeName.error) {
-        setFormError(changeName.error.message);
-      } else toggleIsModalOpen();
+      toggleIsModalOpen();
+    }
+    if (changeName.error) {
+      setFormError(changeName.error.message);
     }
   };
 
