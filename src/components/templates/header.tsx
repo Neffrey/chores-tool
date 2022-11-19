@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { trpc } from "utils/trpc";
 
 // COMPONENTS
 import { useUserDataStore } from "components/stores/userDataStore";
@@ -11,7 +12,16 @@ import IfAdmin from "components/helpers/ifAdmin";
 
 // FC
 const Header = () => {
-  const { user } = useUserDataStore();
+  // STORE
+  const { user, setUser } = useUserDataStore();
+
+  //tRPC
+  const getUser = trpc.useQuery(["user.getUser"], {
+    onSuccess(data) {
+      setUser(data);
+    },
+  });
+
   return (
     <div
       // Row Container

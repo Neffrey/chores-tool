@@ -1,7 +1,7 @@
 // LIBRARIES
 import create from "zustand";
 
-export interface CompletedChoreFormStoreProps {
+export interface ChoreFormStoreProps {
   name: string;
   setName: (input: string) => void;
   date: Date | null;
@@ -30,7 +30,7 @@ const defaultValues = {
   customTime: 0,
 };
 
-export const useCompletedChoreFormStore = create<CompletedChoreFormStoreProps>(
+export const useChoreFormStore = create<ChoreFormStoreProps>(
   (set) => ({
     name: defaultValues.name,
     setName: (input: string) => set({ name: input }),

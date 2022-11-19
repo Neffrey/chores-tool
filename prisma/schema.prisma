@@ -72,8 +72,9 @@ model Chore {
     name        String      @default("untitled")
     user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId      String
-    status      ChoreStatus @default(unknown)
-    date        DateTime    @default(now()) // If completed then completed date, if not completed then due date
+    status      ChoreStatus @default(unknown) //completed todo unknown
+    date        DateTime    @default(now()) // date of creation
+    deadline    DateTime?   @default(now()) // date of completion
     comment     String?     @db.VarChar(500)
     isDifficult Boolean?    @default(false)
     time        Int?        @default(0) // In minutes
@@ -83,7 +84,7 @@ model Chore {
 
 enum ChoreStatus {
     completed
-    scheduled
+    todo
     unknown
 }
 

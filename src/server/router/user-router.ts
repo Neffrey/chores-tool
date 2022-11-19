@@ -1,8 +1,8 @@
 import * as z from "zod";
-import { createProtectedRouter } from "server/router/context";
+import { createUserRouter } from "server/router/context";
 
 // PROTECTED ROUTER
-export const userRouter = createProtectedRouter()
+export const userRouter = createUserRouter()
   // USER ROUTES
   .query("getUser", {
     async resolve({ ctx }) {
@@ -25,8 +25,34 @@ export const userRouter = createProtectedRouter()
       });
     },
   })
+  .query("getAllUsers", {
+    async resolve({ ctx }) {
+      if (ctx.session.user.id)
+        return await ctx.prisma.user.findMany({
+          where: {
+            OR: [
+              {
+                role: "admin",
+              },
+              { role: "user" },
+            ],
+          },
+          select: {
+            id: true,
+            name: true,
+          },
+        });
+    },
+  })
 
   // CHORE ROUTES
+  .query("getAllChores", {
+    async resolve({ ctx }) {
+      return await ctx.prisma.chore.findMany({
+        include: { user: { select: { name: true } } },
+      });
+    },
+  })
   .mutation("addCompletedChore", {
     input: z.object({
       name: z.string().min(1).max(50),
@@ -63,6 +89,39 @@ export const userRouter = createProtectedRouter()
       });
     },
   })
+  .mutation("addTodoChore", {
+    input: z.object({
+      name: z.string().min(1).max(50),
+      comment: z.string(),
+      deadline: z.date(),
+      user: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.chore.create({
+        data: {
+          name: input.name,
+          userId: ctx.session.user.id,
+          date: new Date(),
+          comment: input.comment,
+          status: "todo",
+          ActionLog: {
+            create: {
+              date: new Date(),
+              userId: ctx.session.user.id,
+              type: "added",
+            },
+          },
+        },
+        include: {
+          user: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      });
+    },
+  })
   .mutation("updateChore", {
     input: z.object({
       id: z.string(),
@@ -71,6 +130,7 @@ export const userRouter = createProtectedRouter()
       date: z.date(),
       comment: z.string(),
       isDifficult: z.boolean(),
+      status: z.string(),
       points: z.number().min(0).max(100),
     }),
     async resolve({ ctx, input }) {

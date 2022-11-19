@@ -4,21 +4,34 @@ import { trpc } from "utils/trpc";
 import { FaWindowClose } from "react-icons/fa";
 
 // COMPONENTS
-import { useVisitorDataStore } from "components/stores/visitorDataStore";
+import { useChoresDataStore } from "components/stores/choresDataStore";
 import monthNumberToName from "components/helpers/monthNumberToName";
 import dateToHoursMinutesAMPM from "components/helpers/dateToHoursMinutesAMPM";
 
 // FC
 const AllChoresTable = () => {
   // STORE
-  const { allChores, setAllChores, deleteChore } = useVisitorDataStore();
+  const { allChores, setAllChores, deleteChore } = useChoresDataStore();
 
   //tRPC
   const { isLoading: getAllChoresIsLoading } = trpc.useQuery(
     ["public.getAllChores"],
     {
       onSuccess: (data) => {
-        setAllChores(data);
+        setAllChores(
+          data.map((chore) => {
+            if (chore.user.name) {
+              return {
+                ...chore,
+                user: chore.user.name,
+              };
+            } else
+              return {
+                ...chore,
+                user: null,
+              };
+          })
+        );
       },
     }
   );
@@ -73,7 +86,7 @@ const AllChoresTable = () => {
               //USER
               className="col-span-1 text-lg"
             >
-              {chore?.user?.name ? chore.user.name : ""}
+              {chore?.user ? chore.user : ""}
             </div>
             <div
               // CHORE

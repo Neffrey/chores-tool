@@ -6,9 +6,13 @@ import { User } from "next-auth";
 export interface UserDataStoreTypes {
   user: User | null | undefined;
   setUser: (userData: User | null | undefined) => void;
+  allUsers: User[];
+  setAllUsers: (users: User[]) => void;
 }
 
 export const useUserDataStore = create<UserDataStoreTypes>((set) => ({
   user: null,
-  setUser: (userData: User | null | undefined) => set({ user: userData }),
+  setUser: (userData) => set({ user: userData }),
+  allUsers: [],
+  setAllUsers: (users) => set({ allUsers: users }),
 }));
