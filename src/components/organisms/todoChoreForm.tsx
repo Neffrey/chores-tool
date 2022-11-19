@@ -74,7 +74,6 @@ const TodoChoreForm = () => {
       name: name,
       comment: comment,
       isDifficult: isDifficult,
-      status: "todo",
       time: Math.ceil(getMinutesFromTimeSelect() / 5), // time in 5 minute chunks rounded up
     });
   };

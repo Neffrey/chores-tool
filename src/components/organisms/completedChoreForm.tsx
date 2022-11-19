@@ -64,7 +64,6 @@ const CompletedChoreForm = () => {
       comment: comment,
       isDifficult: isDifficult,
       time: Math.ceil(getMinutesFromTimeSelect() / 5), // time in 5 minute chunks rounded up
-      status: "completed",
     });
   };
 
