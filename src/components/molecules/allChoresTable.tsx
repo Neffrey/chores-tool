@@ -15,7 +15,7 @@ const AllChoresTable = () => {
 
   //tRPC
   const { isLoading: getAllChoresIsLoading } = trpc.useQuery(
-    ["public.getAllChores"],
+    ["user.getAllChores"],
     {
       onSuccess: (data) => {
         setAllChores(
