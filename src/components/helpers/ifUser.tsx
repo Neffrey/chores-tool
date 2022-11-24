@@ -2,16 +2,18 @@
 import { useSession } from "next-auth/react";
 
 // FC
-const IfAuth = (
+const IfUser = (
   authed: React.ReactNode,
   unauthed: React.ReactNode | null = null
 ) => {
   // SESSION
   const { data: session, status } = useSession();
 
-  return status === "authenticated"
-    ? authed
+  return status === "authenticated" &&
+    session?.user?.role === ("user" || "admin")
+    ? // (session?.user?.role === "user" || session?.user?.role === "admin")
+      authed
     : unauthed;
 };
 
-export default IfAuth;
+export default IfUser;

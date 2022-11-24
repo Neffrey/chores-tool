@@ -39,7 +39,7 @@ const TodoChoreForm = () => {
       resetForm();
     },
   });
-  const getCurrentUser = trpc.useQuery(["user.getUser"], {
+  const getCurrentUser = trpc.useQuery(["public.getUser"], {
     onSuccess(data) {
       setUser(data);
     },

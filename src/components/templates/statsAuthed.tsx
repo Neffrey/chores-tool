@@ -14,7 +14,7 @@ const StatsAuthed = () => {
     data: userData,
     isLoading,
     error,
-  } = trpc.useQuery(["user.getUser"], {
+  } = trpc.useQuery(["public.getUser"], {
     onSuccess: (data) => {
       setUser(data);
     },

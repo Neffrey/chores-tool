@@ -5,7 +5,7 @@ import Head from "next/head";
 // COMPONENTS
 import CompletedChoreForm from "components/organisms/completedChoreForm";
 import AllChoresTable from "components/molecules/allChoresTable";
-import IFAuth from "components/helpers/ifAuth";
+import IFUser from "components/helpers/ifUser";
 import ChoresAuthed from "components/templates/choresAuthed";
 import PageUnauthed from "components/templates/pageUnauthed";
 
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
         <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
           Chores
         </h1>
-        {IFAuth(<ChoresAuthed />, <PageUnauthed />)}
+        {IFUser(<ChoresAuthed />, <PageUnauthed />)}
       </main>
     </>
   );

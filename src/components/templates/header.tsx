@@ -16,7 +16,7 @@ const Header = () => {
   const { user, setUser } = useUserDataStore();
 
   //tRPC
-  const getUser = trpc.useQuery(["user.getUser"], {
+  const getUser = trpc.useQuery(["public.getUser"], {
     onSuccess(data) {
       setUser(data);
     },
