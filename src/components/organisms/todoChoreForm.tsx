@@ -5,7 +5,6 @@ import { trpc } from "utils/trpc";
 import { useChoreFormStore } from "components/stores/completedChoreFormStore";
 import { useChoresDataStore } from "components/stores/choresDataStore";
 import { useUserDataStore } from "components/stores/userDataStore";
-import TIME_SELECT_OPTIONS from "components/helpers/choreTimeSelectValues";
 
 // FC
 const TodoChoreForm = () => {
@@ -46,7 +45,9 @@ const TodoChoreForm = () => {
   });
   const getAllUsers = trpc.useQuery(["user.getAllUsers"], {
     onSuccess(data) {
-      console.log("getallusers", data);
+      if (data) {
+        setAllUsers(data);
+      }
     },
   });
 
@@ -104,7 +105,7 @@ const TodoChoreForm = () => {
       </label>
       <div className="grid min-w-full grid-cols-2 pt-5">
         <label className="flex cursor-pointer flex-col items-start justify-center p-2 uppercase tracking-widest">
-          Assign to User
+          Assign chore to
           <div className="p-1" />
           <select
             name="addCompletedChorePoints"
@@ -112,11 +113,16 @@ const TodoChoreForm = () => {
             className="active:border-primary-hover w-full min-w-full rounded-md border-2 border-primary bg-neutral-content p-2 text-neutral"
             onChange={(e) => setTimeSelectOption(parseInt(e.target.value, 10))}
           >
-            {TIME_SELECT_OPTIONS.map((value, index) => (
+            {user?.id && user?.name ? (
+              <option value={user.id}>Myself</option>
+            ) : (
+              <></>
+            )}
+            {/* {TIME_SELECT_OPTIONS.map((value, index) => (
               <option key={index} value={index}>
                 {value}
               </option>
-            ))}
+            ))} */}
           </select>
           <div className="p-2" />
         </label>

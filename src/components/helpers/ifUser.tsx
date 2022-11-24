@@ -10,9 +10,8 @@ const IfUser = (
   const { data: session, status } = useSession();
 
   return status === "authenticated" &&
-    session?.user?.role === ("user" || "admin")
-    ? // (session?.user?.role === "user" || session?.user?.role === "admin")
-      authed
+    (session?.user?.role === "user" || session?.user?.role === "admin")
+    ? authed
     : unauthed;
 };
 

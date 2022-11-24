@@ -32,7 +32,7 @@ const AccountNameChangeModal: FC<AccountNameChangeModalProps> = ({ user }) => {
   } = useNameChangeFormStore();
 
   // tRPC
-  const changeName = trpc.useMutation(["user.changeName"], {
+  const changeName = trpc.useMutation(["public.changeName"], {
     onSuccess(newName) {
       setUser(newName);
     },

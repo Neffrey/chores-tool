@@ -3,6 +3,8 @@ import create from "zustand";
 import { User } from "next-auth";
 
 // TYPES
+type UserWithID = User & { id: string };
+
 export interface UserDataStoreTypes {
   user: User | null | undefined;
   setUser: (userData: User | null | undefined) => void;
