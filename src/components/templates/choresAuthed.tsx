@@ -3,9 +3,8 @@ import { trpc } from "utils/trpc";
 
 // COMPONENTS
 import { useChoresDataStore } from "components/stores/choresDataStore";
-import CompletedChoreForm from "components/organisms/completedChoreForm";
-import TodoChoreForm from "components/organisms/todoChoreForm";
 import SortableTable from "components/organisms/sortableTable";
+import ChoreForm from "components/organisms/choreForm";
 
 // TABLE COLUMNS
 const columns = [
@@ -27,8 +26,7 @@ const columns = [
 // FC
 const ChoresAuthed = () => {
   // STORE
-  const { allChores, setAllChores, status, setStatus, deleteChore } =
-    useChoresDataStore();
+  const { allChores, setAllChores, deleteChore } = useChoresDataStore();
 
   //tRPC
   const { isLoading: getAllChoresIsLoading } = trpc.useQuery(
@@ -62,55 +60,17 @@ const ChoresAuthed = () => {
   return (
     <>
       <div className="p-4" />
-      <div className="grid w-full grid-cols-3 gap-4">
-        {
-          // Completed Chore Form
-          status === "completed" ? (
-            <>
-              <div className="col-span-2 flex justify-center">
-                <CompletedChoreForm />
-              </div>
-              <div className="col-span-1 flex justify-center">
-                <div className="flex flex-col items-center justify-center text-lg uppercase">
-                  Or
-                  <div className="p-2" />
-                  <button
-                    className="btn-primary btn-lg btn w-60"
-                    onClick={() => setStatus("todo")}
-                  >
-                    Add a todo
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            // Todo Chore Form
-            <>
-              <div className="col-span-1 flex justify-center">
-                <div className="flex flex-col items-center justify-center text-lg uppercase">
-                  Or
-                  <div className="p-2" />
-                  <button
-                    className="btn-primary btn-lg btn w-60"
-                    onClick={() => setStatus("completed")}
-                  >
-                    Complete a chore
-                  </button>
-                </div>
-              </div>
-              <div className="col-span-2 flex justify-center">
-                <TodoChoreForm />
-              </div>
-            </>
-          )
-        }
-      </div>
+      <ChoreForm />
       <div className="flex items-center justify-center p-12">
-        <SortableTable
-          columns={columns}
-          data={allChores}
-          deleteMutation={deleteChoreMutation}
-        />
+        {getAllChoresIsLoading ? (
+          <SortableTable
+            columns={columns}
+            data={allChores}
+            deleteMutation={deleteChoreMutation}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
