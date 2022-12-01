@@ -3,8 +3,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 
 // COMPONENTS
-import CompletedChoreForm from "components/organisms/completedChoreForm";
-import AllChoresTable from "components/molecules/allChoresTable";
 import IFUser from "components/helpers/ifUser";
 import ChoresAuthed from "components/templates/choresAuthed";
 import PageUnauthed from "components/templates/pageUnauthed";
